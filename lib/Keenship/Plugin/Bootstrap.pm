@@ -1,4 +1,4 @@
-package Mojolicious::Plugin::Bootstrap;
+package Keenship::Plugin::Bootstrap;
 use Mojo::Base 'Mojolicious::Plugin';
 
 sub register {

@@ -1,7 +1,6 @@
 package Keenship;
 use Mojo::Base 'Mojolicious';
-use constant DEBUG => $ENV{DEBUG} || 0;
-
+use Keenship::Util;
 # This method will run once at server start
 sub startup {
     my $self = shift;
@@ -11,10 +10,12 @@ sub startup {
 
     # Push Keenship::Plugin namespace
     push @{ $self->plugins->namespaces }, 'Keenship::Plugin';
-    push @{ $self->routes->namespaces }, 'Keenship::Controller';
+    push @{ $self->routes->namespaces },  'Keenship::Controller';
 
     #custom plugin
     $self->plugin("Test");
+
+    $self->plugin("Bootstrap");    #JQuery, Bootstrap, etc.
 
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer') if DEBUG;
