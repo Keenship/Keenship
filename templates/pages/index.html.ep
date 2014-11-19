@@ -1,0 +1,2 @@
+ciccia<br>
+<%=pluggable_view('index')%>
