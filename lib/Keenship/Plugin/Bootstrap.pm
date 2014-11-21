@@ -12,8 +12,8 @@ sub register {
 
     return unless ( exists $app->config->{Plugins} );
 
-    $app->plugin( $Plugin, $app->config->{Plugins}->{$Plugin} )
-        foreach ( my $Plugin = %{ $app->config->{Plugins} } );
+    $app->plugin( $_, $app->config->{Plugins}->{$_} )
+        for (keys  %{ $app->config->{Plugins} } );
 }
 
 !!42;
