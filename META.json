@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Mojolicious on Cloud with steroids!",
    "author" : [
       "mudler <mudler@dark-lab.net>"
    ],
@@ -28,7 +28,8 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.035"
+            "Module::Build::Tiny" : "0.035",
+            "perl" : "5.008_001"
          }
       },
       "develop" : {
@@ -42,16 +43,24 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.008001"
+            "CHI" : "0",
+            "Mojo::Base" : "0",
+            "Mojolicious::Commands" : "0"
          }
       },
       "test" : {
          "requires" : {
+            "Test::Mojo" : "0",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "repository" : {
+         "url" : "ssh://git://dev.dark-lab.net/2222/webproject/keenship.git"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:MUDLER"
 }
