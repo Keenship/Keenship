@@ -4,7 +4,12 @@ use strict;
 use warnings;
 
 use FindBin;
-BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
+use Cwd;
+
+$ENV{MOJO_CONFIG} = cwd."/keenship.conf";
+BEGIN { unshift @INC, cwd."/lib" }
+
+#BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 
 # Start command line interface for application
 require Mojolicious::Commands;

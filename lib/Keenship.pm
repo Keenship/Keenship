@@ -1,7 +1,9 @@
 package Keenship;
 use Mojo::Base 'Mojolicious';
+use lib './lib';
 use Keenship::Util;
 use Mojo::Home;
+use Cwd;
 
 =encoding utf-8
 
@@ -46,11 +48,13 @@ sub startup {
     push @{ $self->plugins->namespaces },  'Keenship::Plugin';
     push @{ $self->routes->namespaces },   'Keenship::Controller';
     push @{ $self->commands->namespaces }, 'Keenship::Command';
+    push @{ $self->static->paths },        cwd . '/public';
+    push @{ $self->renderer->paths },       cwd . '/templates';
 
     #custom plugin
     $self->plugin("Test");
 
-    $self->plugin("Bootstrap");            #JQuery, Bootstrap, etc.
+    $self->plugin("Bootstrap");    #JQuery, Bootstrap, etc.
 
     # Documentation browser under "/perldoc"
     $self->plugin('PODRenderer') if DEBUG;
