@@ -44,8 +44,12 @@
       "runtime" : {
          "requires" : {
             "CHI" : "0",
+            "Git::Repository" : "0",
             "Mojo::Base" : "0",
-            "Mojolicious::Commands" : "0"
+            "Mojo::Home" : "0",
+            "Mojolicious::Commands" : "0",
+            "Net::SSH::Perl" : "0",
+            "feature" : "0"
          }
       },
       "test" : {

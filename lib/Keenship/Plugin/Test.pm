@@ -9,8 +9,8 @@ sub register {
     my $r = $app->routes;
 
     # Normal route to controller
-    $r->get( '/info', sub { shift->render("pages/index") } )
-        ;    #adding /info route
+   # $r->get( '/info', sub { shift->render("pages/index") } )
+     #   ;    #adding /info route
 
     $app->add_view(
         index => sub {

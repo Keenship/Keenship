@@ -3,6 +3,7 @@ use Mojo::Base 'Mojolicious';
 use lib './lib';
 use Keenship::Util;
 use Mojo::Home;
+use Mojo::Loader;
 use Cwd;
 
 our $VERSION  = "0.01";
@@ -24,6 +25,14 @@ sub startup {
     push @{ $self->commands->namespaces }, 'Keenship::Command';
     push @{ $self->static->paths },        cwd . '/public';
     push @{ $self->renderer->paths },      cwd . '/templates';
+
+    #Load routes from Keenship::Routes::*
+    my $loader = Mojo::Loader->new;
+    for my $module ( @{ $loader->search('Keenship::Route') } ) {
+        my $e = $loader->load($module);
+        warn qq{Loading route "$module" failed: $e} and next if ref $e;
+        $module->new->register($self);
+    }
 
     #custom plugin
     $self->plugin("Test");
