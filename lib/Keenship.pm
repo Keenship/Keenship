@@ -1,6 +1,5 @@
 package Keenship;
 use Mojo::Base 'Mojolicious';
-use lib './lib';
 use Keenship::Util;
 use Keenship::Util qw(_register);
 
@@ -17,7 +16,7 @@ sub startup {
     my $self = shift;
     mkdir( $self->keenship_home )
         unless -d $self->keenship_home;    #ensure home is existing
-    $self->plugin('Config') if ( -e $self->moniker . ".config" );
+    $self->plugin('Config') if ( -e $self->moniker . ".conf" );
     $self->plugin("ViewBuilder");
 
     # Push Keenship::* namespaces
@@ -33,11 +32,29 @@ sub startup {
 
     #custom plugin
     $self->plugin("Test");
-
     $self->plugin("Bootstrap");    #JQuery, Bootstrap, etc.
 
-    # Documentation browser under "/perldoc"
+    # Documentation browser under "/perldoc" if DEBUG flag is activated
     $self->plugin('PODRenderer') if DEBUG;
+
+    #loading plugins from config file
+
+    #Supports list
+    if (    $self->config
+        and exists $self->config->{plugins}
+        and ref $self->config->{plugins} eq "ARRAY" )
+    {
+        $self->plugin($_) for ( @{ $self->config->{plugins} } );
+    }
+    elsif ( $self->config
+        and exists $self->config->{plugins}
+        and ref $self->config->{plugins} eq "HASH" )
+    {
+        #and hash with options
+        $self->plugin( $_, $self->config->{plugins}->{$_} )
+            for ( keys %{ $self->config->{plugins} } );
+    }
+
 }
 
 1;
