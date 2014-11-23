@@ -8,12 +8,10 @@ has usage       => "Usage: APPLICATION clone [GIT_URL]\n";
 
 sub run {
     my ( $self, $url ) = @_;
-    my $name        = git_repo_name($url);
-    my $destination = $self->app->keenship_home->rel_dir($name);
-    say "Cloning $url into " . $destination;
-    return Git::Repository->new( work_tree => $destination )->run("pull")
-        if -d $destination;
-    Git::Repository->run( clone => $url, $destination );
+    my $name = git_repo_name($url);
+    say "Cloning $url into " . $self->app->keenship_home->rel_dir($name);
+
+    Git::Repository->run( clone => $url, $self->rel_dir($name) );
 
 }
 
