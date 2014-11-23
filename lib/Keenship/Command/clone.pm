@@ -2,7 +2,6 @@ package Keenship::Command::clone;
 use Mojo::Base 'Mojolicious::Command';
 use Keenship::Util qw(git_repo_name);
 use Git::Repository;
-use feature 'say';
 has description => 'Clone a remote Keenship repository.';
 has usage       => "Usage: APPLICATION clone [GIT_URL]\n";
 

@@ -1,6 +1,5 @@
 package Keenship::Command::depinstall;
 use Mojo::Base 'Mojolicious::Command';
-use feature 'say';
 use Carp qw(croak);
 has description => 'Install the deps of the application with cpanm.';
 has usage       => "Usage: APPLICATION depinstall [APP]\n";

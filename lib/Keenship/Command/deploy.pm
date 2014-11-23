@@ -1,7 +1,6 @@
 package Keenship::Command::deploy;
 use Mojo::Base 'Mojolicious::Command';
 use Keenship::Util qw(git_repo_name);
-use feature 'say';
 use Carp qw(croak);
 has description => 'Deploy an app to a remote host.';
 has usage       => "Usage: APPLICATION deploy [HOST] [GIT_URL]\n";

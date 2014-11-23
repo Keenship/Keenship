@@ -2,7 +2,6 @@ package Keenship::Command::list;
 use Mojo::Base 'Mojolicious::Command';
 use Keenship::Util qw(git_repo_name);
 use Git::Repository;
-use feature 'say';
 has description => 'List available applications to start.';
 has usage       => "Usage: APPLICATION list\n";
 
