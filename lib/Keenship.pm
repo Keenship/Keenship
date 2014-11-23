@@ -2,8 +2,9 @@ package Keenship;
 use Mojo::Base 'Mojolicious';
 use lib './lib';
 use Keenship::Util;
+use Keenship::Util qw(_register);
+
 use Mojo::Home;
-use Mojo::Loader;
 use Cwd;
 
 our $VERSION  = "0.01";
@@ -16,23 +17,19 @@ sub startup {
     my $self = shift;
     mkdir( $self->keenship_home )
         unless -d $self->keenship_home;    #ensure home is existing
-    $self->plugin('Config');
+    $self->plugin('Config') if ( -e $self->moniker . ".config" );
     $self->plugin("ViewBuilder");
 
-    # Push Keenship::* namespace
-    push @{ $self->plugins->namespaces },  'Keenship::Plugin';
-    push @{ $self->routes->namespaces },   'Keenship::Controller';
-    push @{ $self->commands->namespaces }, 'Keenship::Command';
+    # Push Keenship::* namespaces
+    push @{ $self->plugins->namespaces }, 'Keenship::Plugin', 'Plugin';
+    push @{ $self->routes->namespaces }, 'Keenship::Controller', 'Controller';
+    push @{ $self->commands->namespaces }, 'Keenship::Command', 'Command';
     push @{ $self->static->paths },        cwd . '/public';
     push @{ $self->renderer->paths },      cwd . '/templates';
 
-    #Load routes from Keenship::Routes::*
-    my $loader = Mojo::Loader->new;
-    for my $module ( @{ $loader->search('Keenship::Route') } ) {
-        my $e = $loader->load($module);
-        warn qq{Loading route "$module" failed: $e} and next if ref $e;
-        $module->new->register($self);
-    }
+    #Load routes from Keenship::Route::* and Route::*
+    _register( $self, 'Keenship::Route' );
+    _register( $self, 'Route' );
 
     #custom plugin
     $self->plugin("Test");
