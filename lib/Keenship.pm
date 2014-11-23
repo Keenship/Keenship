@@ -6,6 +6,10 @@ use Keenship::Util qw(_register);
 use Mojo::Home;
 use Cwd;
 
+BEGIN {$ENV{MOJO_CONFIG} = cwd."/keenship.conf";
+ unshift @INC, cwd."/lib" }
+
+
 our $VERSION  = "0.01";
 our $CODENAME = "Rosetta";
 
@@ -70,6 +74,7 @@ Keenship - Mojolicious on Cloud with steroids!
     $ keenship deploy <host> <keenship_url>
     $ keenship clone <keenship_url>
     $ keenship test <app>
+    $ keenship list
     $ keenship start [host] <app>
     $ keenship stop [host] <app>
     $ keenship debug <app>

@@ -1,16 +1,4 @@
 #!/usr/bin/env perl
-
-use strict;
-use warnings;
-use lib "lib";
-use FindBin;
-use Cwd;
-
-$ENV{MOJO_CONFIG} = cwd."/keenship.conf";
-BEGIN { unshift @INC, cwd."/lib" }
-
-#BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
-
 # Start command line interface for application
 require Mojolicious::Commands;
 Mojolicious::Commands->start_app('Keenship');
