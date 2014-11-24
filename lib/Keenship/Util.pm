@@ -1,14 +1,47 @@
 package Keenship::Util;
 use base 'Exporter';
 use Mojo::Loader;
-use constant DEBUG => $ENV{DEBUG} || 0;
-our @EXPORT    = qw(DEBUG);
-our @EXPORT_OK = qw(git_repo_name _register);
+use Cwd;
+
+#use Keenship::Constants qw(SIGTERM SIG)
+our @EXPORT    = qw();
+our @EXPORT_OK = qw(git_repo_name _register _fork _clean_pidfile safe_chdir);
+
+sub safe_chdir($$@) {
+    my $p = cwd;
+    chdir(shift);
+    $_->(@_);
+    chdir($p);
+}
+
+sub _clean_pidfile {
+    my $self    = shift;
+    my $pidfile = shift;
+    open my $PIDFILE, "<$pidfile";
+    my $PID = <$PIDFILE>;
+    close $PIDFILE;
+    my $running = kill 0, $PID;
+    unlink("$pidfile") if ( !$running );
+}
 
 sub git_repo_name {
     my $name = ( split( /\//, shift ) )[-1];
     $name =~ s/\.git//;
     return $name;
+}
+
+sub _fork (@) {
+    my @cmd = @_;
+
+    my $pid = fork();
+    die "fork failed $!" unless defined $pid;
+    if ( $pid == 0 ) {    # child
+        require POSIX;
+        POSIX::setsid;
+        exec @cmd;
+        die "Could not exec '@cmd': $!";
+    }
+    return $pid;
 }
 
 sub _register {

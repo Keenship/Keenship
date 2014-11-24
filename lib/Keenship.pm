@@ -1,14 +1,15 @@
 package Keenship;
 use Mojo::Base 'Mojolicious';
-use Keenship::Util;
+use Keenship::Constants qw(DEBUG);
 use Keenship::Util qw(_register);
 
 use Mojo::Home;
 use Cwd;
 
-BEGIN {$ENV{MOJO_CONFIG} = cwd."/keenship.conf";
- unshift @INC, cwd."/lib" }
-
+BEGIN {
+    $ENV{MOJO_CONFIG} = cwd . "/keenship.conf";
+    unshift @INC, cwd . "/lib";
+}
 
 our $VERSION  = "0.01";
 our $CODENAME = "Rosetta";
