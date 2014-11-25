@@ -7,6 +7,7 @@ Keenship - Mojolicious on Cloud with steroids!
     $ keenship deploy <host> <keenship_url>
     $ keenship clone <keenship_url>
     $ keenship test <app>
+    $ keenship list
     $ keenship start [host] <app>
     $ keenship stop [host] <app>
     $ keenship debug <app>

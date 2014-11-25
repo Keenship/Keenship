@@ -1,5 +1,5 @@
 use strict;
-use lib 'lib';
+use lib './t/lib';
 use Helpers qw(search_modules);
 use Test::More 0.98;
 
