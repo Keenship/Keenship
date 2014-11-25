@@ -10,7 +10,7 @@ our @EXPORT_OK = qw(git_repo_name _register _fork _clean_pidfile safe_chdir);
 sub safe_chdir($$@) {
     my $p = cwd;
     chdir(shift);
-    $_->(@_);
+    shift->(@_);
     chdir($p);
 }
 
