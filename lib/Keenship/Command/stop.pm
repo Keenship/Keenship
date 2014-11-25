@@ -4,7 +4,7 @@ use Plack::Builder;
 use Mojo::Server::PSGI;
 use Keenship::Constants qw(SIGTERM PIDFILE);
 use Keenship::Util qw(_fork);
-
+use Mojo::Util qw(slurp);
 has description => 'stop plackup';
 has usage       => "Usage: stop plack <appname> [opts]\n";
 
