@@ -3,7 +3,7 @@ use Mojo::Base 'Mojolicious::Command';
 use Plack::Builder;
 use Mojo::Server::PSGI;
 use Keenship::Constants qw(SIGTERM PIDFILE);
-use Keenship::Util qw(_fork);
+use Keenship::Util qw(_fork safe_chdir);
 use Mojo::Util qw(slurp);
 has description => 'stop plackup';
 has usage       => "Usage: stop plack <appname> [opts]\n";
@@ -24,10 +24,7 @@ sub run {
                 and return 0
                 unless ( -e PIDFILE );
             my $PID = slurp PIDFILE;
-            my $pid = _fork
-                "plackup",
-                "-I", "lib/", "-M", "Keenship", "-e",
-                $app->config->{middleware} . 'Keenship->new->app->start', @_;
+            say "Killing $PID";
             kill SIGTERM() => $PID;
             unlink(PIDFILE);
         },
