@@ -6,6 +6,7 @@ use Keenship::Util qw(_fork safe_chdir _clean_pidfile);
 use Keenship::Constants qw(PIDFILE);
 use Mojo::Util qw(slurp spurt);
 use Mojo::HelloWorld;
+use Data::Dumper;
 
 use Mojolicious::Plugin::Config;
 has description => 'start apps using plackup';
@@ -43,11 +44,23 @@ sub run {
             my $port       = $config->{port}       // 8080;
             my $middleware = $config->{middleware} // "";
 
+            my $plack_middleware_string;
+
+            {
+                local $Data::Dumper::Purity = 1;
+                local $Data::Dumper::Indent = 0;
+                local $Data::Dumper::Terse  = 1;
+
+                $plack_middleware_string
+                    .= "enable '$_', "
+                    . Data::Dumper->Dump( [ $middleware->{$_} ] )
+                    for ( keys %{$middleware} );
+            }
             my $pid = _fork "plackup", @args,
                 "-l",
                 join( ":", $host, $port ),
                 "-I", "lib/", "-M", "Keenship", "-e",
-                $middleware . 'Keenship->new->app->start';
+                $plack_middleware_string . 'Keenship->new->app->start';
             spurt( $pid, PIDFILE );
         },
         @args
