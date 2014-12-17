@@ -21,8 +21,8 @@ sub run {
         $ENV{PINTO_MIRROR}
         ? "cpanm --mirror '"
             . $ENV{PINTO_MIRROR}
-            . "' --mirror-only Keenship @args"
-        : "cpanm Keenship @args"
+            . "' --mirror-only Keenship @args -n"
+        : "cpanm Keenship @args -n"
     );       #ensure to have the latest version of Keenship
 
     say "All seems to be fine:";

@@ -11,17 +11,10 @@ sub run {
     croak
         "Fatal error: you must supply an host and a valid git url: user\@sshbox https://bite.my.ass/repo.git"
         if !$host or !$git_url;
+    system("keenship update $host") == 0 or die "Error updating Keenship";
     my $name = git_repo_name($git_url);
     $self->{_ssh} = _ssh($host);
     my $output;
-    $output
-        .= $self->cmd("curl -L https://cpanmin.us | perl - App::cpanminus")
-        ;    #ensure to have the latest version of cpanminus
-
-    $output
-        .= $self->cmd( $ENV{PINTO_MIRROR}
-        ? "cpanm --mirror '" . $ENV{PINTO_MIRROR} . "'' --mirror-only Keenship"
-        : "cpanm Keenship" );   #ensure to have the latest version of Keenship
 
     $output .= $self->cmd("keenship clone $git_url");  #clone the keenship app
 
