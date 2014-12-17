@@ -9,7 +9,7 @@ sub run {
     my ( $self, $url ) = @_;
     my $name        = git_repo_name($url);
     my $destination = $self->app->keenship_home->rel_dir($name);
-    say "Cloning $url into " . $destination;
+    say "Cloning/Pulling $url into " . $destination;
     return Git::Repository->new( work_tree => $destination )->run("pull")
         if -d $destination;
     Git::Repository->run( clone => $url, $destination );

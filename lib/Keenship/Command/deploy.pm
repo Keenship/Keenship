@@ -2,6 +2,7 @@ package Keenship::Command::deploy;
 use Mojo::Base 'Mojolicious::Command';
 use Keenship::Util qw(git_repo_name _ssh);
 use Carp qw(croak);
+
 has description => 'Deploy an app to a remote host.';
 has usage       => "Usage: APPLICATION deploy [HOST] [GIT_URL]\n";
 
@@ -17,8 +18,10 @@ sub run {
         .= $self->cmd("curl -L https://cpanmin.us | perl - App::cpanminus")
         ;    #ensure to have the latest version of cpanminus
 
-    $output .= $self->cmd("cpanm Keenship")
-        ;    #ensure to have the latest version of Keenship
+    $output
+        .= $self->cmd( $ENV{PINTO_MIRROR}
+        ? "cpanm --mirror " . $ENV{PINTO_MIRROR} . " --mirror-only Keenship"
+        : "cpanm Keenship" );   #ensure to have the latest version of Keenship
 
     $output .= $self->cmd("keenship clone $git_url");  #clone the keenship app
 

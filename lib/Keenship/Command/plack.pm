@@ -65,9 +65,6 @@ sub run {
         },
         @args
     );
-
-    #"-s", "Starman",
-
 }
 
 1;

@@ -22,8 +22,8 @@ sub startup {
     my $self = shift;
     mkdir( $self->keenship_home )
         unless -d $self->keenship_home;    #ensure home is existing
-    tie my %db, 'DBM::Deep', $self->keenship_home->rel_file('posted.db');
-    $self->db(\%db);
+   # tie my %db, 'DBM::Deep', $self->keenship_home->rel_file('posted.db');
+    #$self->db(\%db);
 
     $self->plugin('Config') if ( -e $self->moniker . ".conf" );
     $self->plugin("ViewBuilder");

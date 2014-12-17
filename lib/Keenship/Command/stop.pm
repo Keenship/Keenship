@@ -6,7 +6,7 @@ use Keenship::Constants qw(SIGTERM PIDFILE);
 use Keenship::Util qw(_fork safe_chdir);
 use Mojo::Util qw(slurp);
 has description => 'stop plackup';
-has usage       => "Usage: stop plack <appname> [opts]\n";
+has usage       => "Usage: stop <appname> [opts]\n";
 
 sub run {
     my $self      = shift;

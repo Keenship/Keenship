@@ -19,7 +19,7 @@ sub run {
 
    my $output
         = $self->cmd("keenship @args")
-        ;    #ensure to have the latest version of cpanminus
+        ;
     say "All seems to be fine:";
     say $output;
 }
