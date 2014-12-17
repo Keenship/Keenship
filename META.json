@@ -46,9 +46,15 @@
             "CHI" : "0",
             "Git::Repository" : "0",
             "Mojo::Base" : "0",
+            "Mojo::HelloWorld" : "0",
             "Mojo::Home" : "0",
+            "Mojo::Loader" : "0",
+            "Mojo::Server::PSGI" : "0",
+            "Mojo::Util" : "0",
             "Mojolicious::Commands" : "0",
+            "Mojolicious::Plugin::Config" : "0",
             "Net::SSH::Perl" : "0",
+            "Plack::Builder" : "0",
             "feature" : "0"
          }
       },
