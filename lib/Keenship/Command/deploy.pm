@@ -20,7 +20,7 @@ sub run {
 
     $output
         .= $self->cmd( $ENV{PINTO_MIRROR}
-        ? "cpanm --mirror " . $ENV{PINTO_MIRROR} . " --mirror-only Keenship"
+        ? "cpanm --mirror '" . $ENV{PINTO_MIRROR} . "'' --mirror-only Keenship"
         : "cpanm Keenship" );   #ensure to have the latest version of Keenship
 
     $output .= $self->cmd("keenship clone $git_url");  #clone the keenship app
