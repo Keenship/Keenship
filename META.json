@@ -52,7 +52,11 @@
             "Mojo::Server::PSGI" : "0",
             "Mojo::Util" : "0",
             "Mojolicious::Commands" : "0",
+            "Mojolicious::Plugin::AssetPack" : "0",
+            "Mojolicious::Plugin::Bootstrap3" : "0",
             "Mojolicious::Plugin::Config" : "0",
+            "Mojolicious::Plugin::FontAwesome4" : "0",
+            "Mojolicious::Plugin::JQuery" : "0",
             "Net::SSH::Perl" : "0",
             "Plack::Builder" : "0",
             "feature" : "0"
@@ -72,6 +76,6 @@
          "url" : "git://dev.dark-lab.net/2222/webproject/keenship.git"
       }
    },
-   "version" : "0.03",
+   "version" : "0.05",
    "x_authority" : "cpan:MUDLER"
 }

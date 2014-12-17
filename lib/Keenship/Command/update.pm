@@ -7,7 +7,7 @@ has description => 'Keep keenship and cpanm up-to-date to the machine.';
 has usage       => "Usage: APPLICATION update HOST\n";
 
 sub run {
-    my ( $self, $host, $git_url ) = @_;
+    my ( $self, $host, $git_url, @args ) = @_;
     croak
         "Fatal error: you must supply an host and a valid git url: user\@sshbox"
         if !$host;
@@ -17,10 +17,13 @@ sub run {
         .= $self->cmd("curl -L https://cpanmin.us | perl - App::cpanminus")
         ;    #ensure to have the latest version of cpanminus
 
-    $output
-        .= $self->cmd( $ENV{PINTO_MIRROR}
-        ? "cpanm --mirror " . $ENV{PINTO_MIRROR} . " --mirror-only Keenship"
-        : "cpanm Keenship" );   #ensure to have the latest version of Keenship
+    $output .= $self->cmd(
+        $ENV{PINTO_MIRROR}
+        ? "cpanm --mirror '"
+            . $ENV{PINTO_MIRROR}
+            . "' --mirror-only Keenship @args"
+        : "cpanm Keenship @args"
+    );       #ensure to have the latest version of Keenship
 
     say "All seems to be fine:";
     say $output;

@@ -1,5 +1,9 @@
 package Keenship::Plugin::Bootstrap;
 use Mojo::Base 'Mojolicious::Plugin';
+use Mojolicious::Plugin::AssetPack;
+use Mojolicious::Plugin::Bootstrap3;
+use Mojolicious::Plugin::FontAwesome4;
+use Mojolicious::Plugin::JQuery;
 
 sub register {
     my ( $self, $app ) = @_;
