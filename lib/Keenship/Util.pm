@@ -5,20 +5,12 @@ use feature 'say';
 use Cwd;
 use Keenship::Constants qw(DEBUG);
 use Mojo::Util qw(slurp);
-use Net::SSH::Perl;
 
 #use Keenship::Constants qw(SIGTERM SIG)
 our @EXPORT = qw();
 our @EXPORT_OK
-    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir _ssh);
+    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir);
 
-sub _ssh($) {
-    my ( $user, $host ) = split( /\@/, shift );
-    my $ssh = Net::SSH::Perl->new($host);
-    say "[DEBUG] Connecting to $host with user $user" if DEBUG;
-    $ssh->login($user);
-    return $ssh;
-}
 
 sub safe_chdir($$@) {
     my $p = cwd;
