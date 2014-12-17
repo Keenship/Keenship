@@ -11,7 +11,7 @@ BEGIN {
     unshift @INC, cwd . "/lib";
 }
 
-our $VERSION  = "0.05";
+our $VERSION  = "0.06";
 our $CODENAME = "Rosetta";
 
 has 'keenship_home' =>
@@ -41,7 +41,6 @@ sub startup {
 
     #custom plugin
     $self->plugin("Test");
-    $self->plugin("Bootstrap");    #JQuery, Bootstrap, etc.
 
     # Documentation browser under "/perldoc" if DEBUG flag is activated
     $self->plugin('PODRenderer') if DEBUG;
