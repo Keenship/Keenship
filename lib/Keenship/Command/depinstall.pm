@@ -13,8 +13,8 @@ sub run {
             . $self->app->keenship_home->rel_dir($application) . "';"
             . (
             ( defined $mirror )
-            ? "cpanm --mirror '$mirror' --installdeps . @_"
-            : "cpanm --installdeps . @_"
+            ? "cpanm --mirror '$mirror' --installdeps ."
+            : "cpanm --installdeps ."
             )
     );
 }
