@@ -7,8 +7,9 @@ use Keenship::Constants qw(DEBUG);
 use Mojo::Util qw(slurp);
 
 #use Keenship::Constants qw(SIGTERM SIG)
-our @EXPORT    = qw();
-our @EXPORT_OK = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo);
+our @EXPORT = qw();
+our @EXPORT_OK
+    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo);
 
 sub safe_chdir($$@) {
     my $p = cwd;
@@ -58,6 +59,7 @@ sub _register {
 }
 
 sub is_git_repo {
-    /ssh|git/i;
+    $_[0] =~ /ssh|git/i;
 }
+
 !!42;
