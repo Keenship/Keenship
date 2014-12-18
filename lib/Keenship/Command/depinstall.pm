@@ -8,11 +8,13 @@ sub run {
     my ( $self, $application, $mirror ) = @_;
     croak "Fatal error: you must supply an applicaiton name"
         if !$application;
-    exec( "cd "
+    exec(
+        "cd "
             . $self->app->keenship_home->rel_dir($application) . "; "
             . ( defined $mirror )
         ? "cpanm --mirror '$mirror' --installdeps . @_"
-        : "cpanm --installdeps . @_" );
+        : "cpanm --installdeps . @_"
+    );
 }
 
 !!42;
