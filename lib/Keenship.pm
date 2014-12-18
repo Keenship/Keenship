@@ -11,7 +11,7 @@ BEGIN {
     unshift @INC, cwd . "/lib";
 }
 
-our $VERSION  = "0.15";
+our $VERSION  = "0.17";
 our $CODENAME = "Rosetta";
 
 has 'keenship_home' =>

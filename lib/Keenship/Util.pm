@@ -7,10 +7,8 @@ use Keenship::Constants qw(DEBUG);
 use Mojo::Util qw(slurp);
 
 #use Keenship::Constants qw(SIGTERM SIG)
-our @EXPORT = qw();
-our @EXPORT_OK
-    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir);
-
+our @EXPORT    = qw();
+our @EXPORT_OK = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo);
 
 sub safe_chdir($$@) {
     my $p = cwd;
@@ -57,5 +55,9 @@ sub _register {
         warn qq{Loading route "$module" failed: $e} and next if ref $e;
         $module->new->register($app);
     }
+}
+
+sub is_git_repo {
+    /ssh|git/i;
 }
 !!42;
