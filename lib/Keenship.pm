@@ -2,7 +2,7 @@ package Keenship;
 use Mojo::Base 'Mojolicious';
 use Keenship::Constants qw(DEBUG);
 use Keenship::Util qw(_register);
-
+use Mojolicious::Plugin::ViewBuilder;
 use Mojo::Home;
 use Cwd;
 
@@ -11,7 +11,7 @@ BEGIN {
     unshift @INC, cwd . "/lib";
 }
 
-our $VERSION  = "0.14";
+our $VERSION  = "0.15";
 our $CODENAME = "Rosetta";
 
 has 'keenship_home' =>

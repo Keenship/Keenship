@@ -7,6 +7,7 @@ requires 'Mojo::Server::PSGI';
 requires 'Mojo::Util';
 requires 'Mojolicious::Commands';
 requires 'Mojolicious::Plugin::Config';
+requires 'Mojolicious::Plugin::ViewBuilder';
 requires 'Plack::Builder';
 requires 'feature';
 
