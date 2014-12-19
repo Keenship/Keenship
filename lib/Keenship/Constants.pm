@@ -4,7 +4,7 @@ use Config;
 use constant DEBUG => $ENV{DEBUG} || 0;
 use constant PIDFILE => "daemon.pid";
 use constant KEENSHIP_PREFIX_CMD =>
-    "cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib);";
+    'cpanm --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib);';
 our @EXPORT    = qw(DEBUG);
 our @EXPORT_OK = qw( KEENSHIP_PREFIX_CMD SIGTERM SIGKILL SIGINT PIDFILE);
 
