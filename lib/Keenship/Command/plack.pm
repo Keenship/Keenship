@@ -59,7 +59,7 @@ sub run {
                 "-l",
                 join( ":", $host, $port ),
                 "-I", "lib/", "-M", "Keenship", "-e",
-                ($plack_middleware_string)
+                (defined $plack_middleware_string)
                 ? $plack_middleware_string
                 : () . 'Keenship->new->app->start';
             spurt( $pid, PIDFILE );
