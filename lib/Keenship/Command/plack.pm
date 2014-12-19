@@ -55,13 +55,17 @@ sub run {
                     . Data::Dumper->Dump( [ $config->{middleware}->{$_} ] )
                     for ( keys %{ $config->{middleware} } );
             } if ( exists $config->{middleware} );
-            my $pid = _fork "plackup", @args,
+            my $pid =  (defined $plack_middleware_string)
+                ? _fork "plackup", @args,
                 "-l",
                 join( ":", $host, $port ),
                 "-I", "lib/", "-M", "Keenship", "-e",
-                (defined $plack_middleware_string)
-                ? $plack_middleware_string
-                : () . 'Keenship->new->app->start';
+               $plack_middleware_string
+               . 'Keenship->new->app->start': _fork "plackup", @args,
+                "-l",
+                join( ":", $host, $port ),
+                "-I", "lib/", "-M", "Keenship", "-e",
+                'Keenship->new->app->start';
             spurt( $pid, PIDFILE );
         },
         @args
