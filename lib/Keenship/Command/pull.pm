@@ -11,7 +11,7 @@ sub run {
     say "Cloning/Pulling $url into " . $destination;
     return Git::Repository->new( work_tree => $destination )->run("pull")
         if -d $destination;
-    Git::Repository->run( clone => $url, $destination );
+    say "[!] I couldn't find the cartridge";
 
 }
 
