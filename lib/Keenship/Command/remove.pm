@@ -11,10 +11,11 @@ has usage       => "Usage: remove APPLICATION\n";
 
 sub run {
     my ( $self, $app ) = @_;
-    die("That's not a directory!")
+    say("Cartridge not present") and return 0
         if !-d $self->app->keenship_home->rel_dir($app);
     remove_tree( $self->app->keenship_home->rel_dir($app) );
     say "[*] Removed " . $self->app->keenship_home->rel_dir($app);
+    return 0;
 }
 
 1;
