@@ -8,7 +8,7 @@ has usage       => "Usage: APPLICATION pull [APP]\n";
 sub run {
     my ( $self, $name ) = @_;
     my $destination = $self->app->keenship_home->rel_dir($name);
-    say "Cloning/Pulling $url into " . $destination;
+    say "Cloning/Pulling $name into " . $destination;
     return Git::Repository->new( work_tree => $destination )->run("pull")
         if -d $destination;
     say "[!] I couldn't find the cartridge";
