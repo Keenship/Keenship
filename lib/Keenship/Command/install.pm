@@ -5,7 +5,7 @@ use Keenship::Util qw(git_repo_name);
 use Git::Repository;
 use File::Copy::Recursive qw(dircopy);
 has description => 'Install a Keenship cartridge.';
-has usage       => "Usage: APPLICATION install /path/to/cartridge\n";
+has usage       => "Usage: install /path/to/cartridge\n";
 
 sub run {
     my ( $self, $dir ) = @_;
