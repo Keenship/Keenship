@@ -9,11 +9,17 @@ use Term::ANSIColor;
 use utf8;
 use Encode;
 
+
 #use Keenship::Constants qw(SIGTERM SIG)
 our @EXPORT = qw(info error notice);
 our @EXPORT_OK
-    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo dir_tree_size);
+    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo dir_tree_size whence);
 
+sub whence {
+   my $cmd = shift;
+   -x "$_/$cmd" && return "$_/$cmd" for (split /:/, $ENV{PATH});
+   return;
+}
 sub dir_tree_size {
     my $dir = shift;
     my ( $i, $total, $f );
