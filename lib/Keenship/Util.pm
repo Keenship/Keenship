@@ -12,8 +12,25 @@ use Encode;
 #use Keenship::Constants qw(SIGTERM SIG)
 our @EXPORT = qw(info error notice);
 our @EXPORT_OK
-    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo);
+    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo dir_tree_size);
 
+sub dir_tree_size {
+    my $dir = shift;
+    my ( $i, $total, $f );
+    $total = 0;
+    opendir DIR, $dir;
+    my @files = grep !/^\.\.?$/, readdir DIR;
+    for $i (@files) {
+        $f = "$dir/$i";
+        if ( -d $f ) {
+            $total += dir_tree_size($f);
+        }
+        else {
+            $total += -s $f;
+        }
+    }
+    return $total;
+}
 
 sub error {
     my @msg = @_;
