@@ -2,9 +2,9 @@ package Keenship::Command::plack;
 use Mojo::Base 'Mojolicious::Command';
 use Plack::Builder;
 use Mojo::Server::PSGI;
-use Keenship::Util qw(_fork safe_chdir _clean_pidfile);
+use Keenship::Util qw(_fork safe_chdir _clean_pidfile info error notice);
 use Keenship::Constants qw(PIDFILE);
-use Mojo::Util qw(slurp info error notice spurt);
+use Mojo::Util qw(slurp spurt);
 use Mojo::HelloWorld;
 use Data::Dumper;
 
