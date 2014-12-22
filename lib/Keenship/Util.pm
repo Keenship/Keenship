@@ -7,6 +7,7 @@ use Keenship::Constants qw(DEBUG);
 use Mojo::Util qw(slurp);
 use Term::ANSIColor;
 use utf8;
+use Encode;
 
 #use Keenship::Constants qw(SIGTERM SIG)
 our @EXPORT = qw(info error notice);

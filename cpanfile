@@ -1,3 +1,4 @@
+requires 'Encode';
 requires 'File::Copy::Recursive';
 requires 'File::Path';
 requires 'Git::Repository';
