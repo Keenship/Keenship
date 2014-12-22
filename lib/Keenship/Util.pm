@@ -5,11 +5,41 @@ use feature 'say';
 use Cwd;
 use Keenship::Constants qw(DEBUG);
 use Mojo::Util qw(slurp);
+use Term::ANSIColor;
+use utf8;
 
 #use Keenship::Constants qw(SIGTERM SIG)
-our @EXPORT = qw();
+our @EXPORT = qw(info error notice);
 our @EXPORT_OK
     = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo);
+
+
+sub error {
+    my @msg = @_;
+    print STDERR color 'bold red';
+    print STDERR encode_utf8('☢☢☢ ☛  ');
+    print STDERR color 'bold white';
+    print STDERR join( "\n", @msg ), "\n";
+    print STDERR color 'reset';
+}
+
+sub info {
+    my @msg = @_;
+    print STDERR color 'bold green';
+    print STDERR encode_utf8('╠ ');
+    print STDERR color 'bold white';
+    print STDERR join( "\n", @msg ), "\n";
+    print STDERR color 'reset';
+}
+
+sub notice {
+    my @msg = @_;
+    print STDERR color 'bold yellow';
+    print STDERR encode_utf8('☛ ');
+    print STDERR color 'bold white';
+    print STDERR join( "\n", @msg ), "\n";
+    print STDERR color 'reset';
+}
 
 sub safe_chdir($$@) {
     my $p = cwd;

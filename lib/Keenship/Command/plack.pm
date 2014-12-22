@@ -4,7 +4,7 @@ use Plack::Builder;
 use Mojo::Server::PSGI;
 use Keenship::Util qw(_fork safe_chdir _clean_pidfile);
 use Keenship::Constants qw(PIDFILE);
-use Mojo::Util qw(slurp spurt);
+use Mojo::Util qw(slurp info error notice spurt);
 use Mojo::HelloWorld;
 use Data::Dumper;
 
@@ -33,10 +33,10 @@ sub run {
     safe_chdir(
         $cartridge,
         sub {
-            say "=" x 32;
+            notice "=" x 32;
             _clean_pidfile(PIDFILE)
                 if ( -e PIDFILE );    #delete pid if server is not running
-            say "Plackup is already running"
+            notice "Plackup is already running"
                 and return 0
                 unless ( !-e PIDFILE );
 
@@ -55,13 +55,13 @@ sub run {
                     . Data::Dumper->Dump( [ $config->{middleware}->{$_} ] )
                     for ( keys %{ $config->{middleware} } );
             } if ( exists $config->{middleware} );
-            my $pid =  (defined $plack_middleware_string)
+            my $pid = ( defined $plack_middleware_string )
                 ? _fork "plackup", @args,
                 "-l",
                 join( ":", $host, $port ),
                 "-I", "lib/", "-M", "Keenship", "-e",
-               $plack_middleware_string
-               . 'Keenship->new->app->start': _fork "plackup", @args,
+                $plack_middleware_string . 'Keenship->new->app->start'
+                : _fork "plackup", @args,
                 "-l",
                 join( ":", $host, $port ),
                 "-I", "lib/", "-M", "Keenship", "-e",

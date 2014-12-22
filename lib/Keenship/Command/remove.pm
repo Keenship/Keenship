@@ -1,7 +1,6 @@
 package Keenship::Command::remove;
 use Mojo::Base 'Mojolicious::Command';
-use feature 'say';
-use Keenship::Util qw(git_repo_name);
+use Keenship::Util qw(git_repo_name info notice);
 use Git::Repository;
 use File::Copy::Recursive qw(dircopy);
 use File::Path qw(remove_tree);
@@ -11,10 +10,10 @@ has usage       => "Usage: remove APPLICATION\n";
 
 sub run {
     my ( $self, $app ) = @_;
-    say("Cartridge not present") and return 0
+    notice("Cartridge not present") and return 0
         if !$app or !-d $self->app->keenship_home->rel_dir($app);
     remove_tree( $self->app->keenship_home->rel_dir($app) );
-    say "[*] Removed " . $self->app->keenship_home->rel_dir($app);
+    info "Removed " . $self->app->keenship_home->rel_dir($app);
     return 0;
 }
 

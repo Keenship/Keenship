@@ -1,3 +1,5 @@
+requires 'File::Copy::Recursive';
+requires 'File::Path';
 requires 'Git::Repository';
 requires 'Mojo::Base';
 requires 'Mojo::HelloWorld';
@@ -9,6 +11,7 @@ requires 'Mojolicious::Commands';
 requires 'Mojolicious::Plugin::Config';
 requires 'Mojolicious::Plugin::ViewBuilder';
 requires 'Plack::Builder';
+requires 'Term::ANSIColor';
 requires 'feature';
 
 on configure => sub {

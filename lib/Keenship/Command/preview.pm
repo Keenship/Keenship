@@ -6,7 +6,7 @@ has usage       => "Usage: APPLICATION preview [APP] <morbo options>\n";
 
 sub run {
     my ( $self, $application, @args ) = @_;
-    croak "Fatal error: you must supply an applicaiton name"
+    croak "Fatal error: you must supply a valid application name"
         if !$application;
     exec(     "cd "
             . $self->app->keenship_home->rel_dir($application)

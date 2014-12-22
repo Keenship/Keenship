@@ -3,7 +3,7 @@ use Mojo::Base 'Mojolicious::Command';
 use Plack::Builder;
 use Mojo::Server::PSGI;
 use Keenship::Constants qw(SIGTERM PIDFILE);
-use Keenship::Util qw(_fork safe_chdir);
+use Keenship::Util qw(_fork safe_chdir info error);
 use Mojo::Util qw(slurp);
 has description => 'stop plackup';
 has usage       => "Usage: stop <appname> [opts]\n";
@@ -20,11 +20,11 @@ sub run {
     safe_chdir(
         $cartridge,
         sub {
-            say "No running instance found"
+            error "No running instance found"
                 and return 0
                 unless ( -e PIDFILE );
             my $PID = slurp PIDFILE;
-            say "Killing $PID";
+            info "Killing $PID";
             kill SIGTERM() => $PID;
             unlink(PIDFILE);
         },
