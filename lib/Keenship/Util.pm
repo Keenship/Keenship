@@ -9,17 +9,17 @@ use Term::ANSIColor;
 use utf8;
 use Encode;
 
-
 #use Keenship::Constants qw(SIGTERM SIG)
 our @EXPORT = qw(info error notice);
 our @EXPORT_OK
-    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo dir_tree_size whence);
+    = qw(git_repo_name _register _fork _clean_pidfile safe_chdir is_git_repo dir_tree_size whence _load_plugin);
 
 sub whence {
-   my $cmd = shift;
-   -x "$_/$cmd" && return "$_/$cmd" for (split /:/, $ENV{PATH});
-   return;
+    my $cmd = shift;
+    -x "$_/$cmd" && return "$_/$cmd" for ( split /:/, $ENV{PATH} );
+    return;
 }
+
 sub dir_tree_size {
     my $dir = shift;
     my ( $i, $total, $f );
@@ -114,6 +114,22 @@ sub _register {
 
 sub is_git_repo {
     $_[0] =~ /ssh|git/i;
+}
+
+sub _load_plugin {
+    my $app    = shift;
+    my $plugin = shift;
+    if ( $plugin
+        and ref $plugin eq "ARRAY" )
+    {
+        $app->plugin($_) for ( @{$plugin} );
+    }
+    elsif ( $plugin
+        and ref $plugin eq "HASH" )
+    {
+        #and hash with options
+        $app->plugin( $_, $plugin->{$_} ) for ( keys %{$plugin} );
+    }
 }
 
 !!42;
