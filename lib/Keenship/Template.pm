@@ -22,7 +22,7 @@ sub register {
     push @{ $app->renderer->paths }, $local_template;
 
     #   if -d $local_template;
-    $self->prepare() if $self->can("prepare");
+    $self->prepare($app, $config) if $self->can("prepare");
 }
 
 1;
