@@ -3,3 +3,4 @@ Revision history for Perl extension Keenship
 {{$NEXT}}
 
     - Test Fixes
+    - Allow templates to prepare()

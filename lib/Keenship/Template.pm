@@ -17,9 +17,12 @@ sub register {
     my $local_template = $self->asset_path . '/templates';
     $app->plugin('AssetPack') unless eval { $app->asset };
     push @{ $app->static->paths }, $local_public;
-     #   if -d $local_public;
+
+    #   if -d $local_public;
     push @{ $app->renderer->paths }, $local_template;
-     #   if -d $local_template;
+
+    #   if -d $local_template;
+    $self->prepare() if $self->can("prepare");
 }
 
 1;
