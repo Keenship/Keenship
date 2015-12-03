@@ -104,7 +104,7 @@ sub _register {
     my $namespace = shift;
 
     #Load routes from Keenship::Routes::*
-    for my $module ( @{ find_modules($namespace) } ) {
+    for my $module (  find_modules($namespace)  ) {
         my $e = load_class($module);
         warn qq{Loading route "$module" failed: $e} and next if ref $e;
         $module->new->register($app);

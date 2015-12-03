@@ -36,3 +36,6 @@ Copyright 2014- mudler
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
+
+# SEE ALSO
+[App::Witchcraft](https://metacpan.org/pod/App::Witchcraft), [App::witchcraft::Command::Sync](https://metacpan.org/pod/App::witchcraft::Command::Sync)
