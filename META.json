@@ -4,7 +4,7 @@
       "mudler <mudler@dark-lab.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v2.2.1, CPAN::Meta::Converter version 2.142060",
+   "generated_by" : "Minilla/v2.5.0, CPAN::Meta::Converter version 2.143240",
    "license" : [
       "perl_5"
    ],
@@ -70,9 +70,14 @@
    },
    "release_status" : "unstable",
    "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/Keenship/Keenship/issues"
+      },
+      "homepage" : "https://github.com/Keenship/Keenship",
       "repository" : {
          "type" : "git",
-         "url" : "git@github.com:Keenship/Keenship.git"
+         "url" : "git://github.com/Keenship/Keenship.git",
+         "web" : "https://github.com/Keenship/Keenship"
       }
    },
    "version" : "0.47",
