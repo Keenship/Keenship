@@ -72,7 +72,7 @@
    "resources" : {
       "repository" : {
          "type" : "git",
-         "url" : "git://dev.dark-lab.net/2222/webproject/keenship.git"
+         "url" : "git@github.com:Keenship/Keenship.git"
       }
    },
    "version" : "0.47",
