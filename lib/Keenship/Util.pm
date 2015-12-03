@@ -1,6 +1,6 @@
 package Keenship::Util;
 use base 'Exporter';
-use Mojo::Loader;
+use Mojo::Loader qw(find_modules load_class);
 use feature 'say';
 use Cwd;
 use Keenship::Constants qw(DEBUG);
@@ -106,7 +106,7 @@ sub _register {
     #Load routes from Keenship::Routes::*
     my $loader = Mojo::Loader->new;
     for my $module ( @{ $loader->search($namespace) } ) {
-        my $e = $loader->load($module);
+        my $e = load_class($module);
         warn qq{Loading route "$module" failed: $e} and next if ref $e;
         $module->new->register($app);
     }

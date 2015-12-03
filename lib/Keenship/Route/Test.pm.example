@@ -4,12 +4,9 @@ use Mojo::Base -base;
 sub register {
     my ( $self, $app ) = @_;
 
-    my $r = $app->routes;
-
-    # Normal route to controller
-    $r->get( '/info', sub { shift->render("pages/index") } )
+    my $r = $app->routes->get( '/info', sub { shift->render("pages/index") } )
         ;    #adding /info route
 
 }
 
-!!42;
+1;
