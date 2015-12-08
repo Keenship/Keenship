@@ -17,9 +17,13 @@ sub run {
     my $app       = $self->app;
     my $cartridge = "./";
     if ( @_ > 0 ) {
-        $cartridge = $self->app->keenship_home->rel_dir(shift);
-        chomp $cartridge;
-        $cartridge .= "/";
+        my $appname=shift;
+        if(-d $self->app->keenship_home->rel_dir($appname)) {
+            chomp $cartridge;
+            $cartridge .= "/";
+        } else {
+            $cartridge=$appname."/";
+        }
     }
 
     my $config = Mojo::HelloWorld->new->plugin(
