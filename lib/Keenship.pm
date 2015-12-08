@@ -39,9 +39,6 @@ sub startup {
     _register( $self, 'Keenship::Route' );
     _register( $self, 'Route' );
 
-    #custom plugin
-    $self->plugin("Test");
-
     # Documentation browser under "/perldoc" if DEBUG flag is activated
     $self->plugin('PODRenderer') if DEBUG;
 
